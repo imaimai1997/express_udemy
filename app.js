@@ -21,6 +21,20 @@ app.use(accesslogger());
 
 //Dynamic resource rooting
 app.use("/", require("./routes/index.js"));
+app.use("/test", async (req, res, next) => {
+  const { mySQLClient, sql } = require("./lib/database/client.js");
+  var data;
+  try {
+    await mySQLClient.connect();
+    data = await mySQLClient.query(await sql("SELECT_SHOP_BASIC_BY_ID"));
+    console.log(data);
+  } catch (err) {
+    next(err);
+  } finally {
+    await mySQLClient.end();
+  }
+  res.end("OK");
+});
 
 // Set application log
 app.use(applicationlogger());
