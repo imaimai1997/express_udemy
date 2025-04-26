@@ -69,7 +69,10 @@
               </div>
             </div>
             <div>
-              <!-- shop review-->
+              <% for(var review of reviews){ %>
+              <% review.shop = id %>
+              <%- include("./review.ejs",review) %>
+              <% } %>
             </div>
           </div>
         </div>
