@@ -5,7 +5,6 @@
   <title>Document</title>
   <%- include("../_share/stylesheets.ejs") %>
   <link rel="stylesheets" href="public/stylesheets/shops.css">
-  <title>Document</title>
 </head>
 <body>
   <div class="outerframe">
@@ -25,12 +24,22 @@
     </div>
     <div class="card-columns mt-5">
      <% for (var item of results){ %>
-      <%-include("./items.ejs",item) %>
+      <%-include("./item.ejs",item) %>
        <% } %>
     </div>
 <nav>
   <ul class="pagination justify-content-center">
-    <!--Pagination-->
+    <% for (var i = 1; i <= pagenation.max; i++){ %>
+     <%  if(pagenation.current !==i){ %>
+      <%   if(i <=3 || (pagenation.current - 3 < i && i < pagenation.current +3) || pagenation.max -3<i){ %>
+        <li class="page-item"><a href="/search/?keyword=<%= keyword %>&page=<%= i%>" class="page-link"><%= i %></a></li>
+        <%  }else{ %>
+        . 
+        <%  } %>
+      <%  }else{ %>
+        <li class="page-item active" aria-current="page"><span class="page-link"><%= i %></span></li>
+      <% } %>
+    <% } %>
   </ul>
 </nav>
   </main>
