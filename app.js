@@ -1,4 +1,5 @@
-const PORT = process.env.PORT || 3000;
+const appconfig = require("./config/application.config.js");
+const dbconfig = require("./config/mysql.config.js");
 const path = require("path");
 const logger = require("./lib/log/logger.js");
 const accesslogger = require("./lib/log/accesslogger.js");
@@ -6,6 +7,8 @@ const applicationlogger = require("./lib/log/applicationlogger.js");
 const express = require("express");
 const favicon = require("serve-favicon");
 const cookie = require("cookie-parser");
+const session = require("express-session");
+const MySQLStore = require("express-mysql-session")(session);
 const app = express();
 
 require("dotenv").config();
@@ -30,6 +33,21 @@ app.use(accesslogger());
 
 //Set middleware
 app.use(cookie());
+app.use(
+  session({
+    store: new MySQLStore({
+      host: dbconfig.HOST,
+      port: dbconfig.PORT,
+      user: dbconfig.USERNAME,
+      password: dbconfig.PASSWORD,
+      database: dbconfig.DATABASE,
+    }),
+    secret: appconfig.security.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    name: "sid",
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 
 //Dynamic resource rooting
@@ -41,6 +59,6 @@ app.use("/", require("./routes/index.js"));
 // Set application log
 app.use(applicationlogger());
 
-app.listen(PORT, () => {
-  logger.application.info(`Application listening at ${PORT}`);
+app.listen(appconfig.PORT, () => {
+  logger.application.info(`Application listening at ${appconfig.PORT}`);
 });
