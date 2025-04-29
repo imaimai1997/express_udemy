@@ -5,6 +5,7 @@ const accesslogger = require("./lib/log/accesslogger.js");
 const applicationlogger = require("./lib/log/applicationlogger.js");
 const express = require("express");
 const favicon = require("serve-favicon");
+const cookie = require("cookie-parser");
 const app = express();
 
 require("dotenv").config();
@@ -28,6 +29,7 @@ app.use("/public", express.static(path.join(__dirname, "/public")));
 app.use(accesslogger());
 
 //Set middleware
+app.use(cookie());
 app.use(express.urlencoded({ extended: true }));
 
 //Dynamic resource rooting
