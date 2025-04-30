@@ -134,7 +134,12 @@ router.post("/regist/execute", async (req, res, next) => {
   }
   delete req.session._csrf;
   res.clearCookie("_csrf");
-  res.render("./account/reviews/regist-complete.ejs", { shopId });
+  res.redirect(`/account/reviews/regist/complete?shopId=${shopId}`);
+});
+router.get("/regist/complete", (req, res, next) => {
+  res.render("./account/reviews/regist-complete.ejs", {
+    shopId: req.query.shopId,
+  });
 });
 
 module.exports = router;
