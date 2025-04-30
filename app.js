@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const appconfig = require("./config/application.config.js");
 const dbconfig = require("./config/mysql.config.js");
 const path = require("path");
@@ -11,7 +13,6 @@ const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 const app = express();
 
-require("dotenv").config();
 //Express setting
 app.set("view engine", "ejs");
 app.disable("x-powered-by");
