@@ -13,6 +13,10 @@ router.get("/login", (req, res, next) => {
   res.render("./account/login.ejs", { message: req.flash("message") });
 });
 router.post("/login", authenticate());
+router.post("/logout", (req, res, next) => {
+  req.logout();
+  res.redirect("/account/login");
+});
 
 router.use(
   "/reviews",
