@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
 const appconfig = require("./config/application.config.js");
 const dbconfig = require("./config/mysql.config.js");
 const path = require("path");
@@ -45,6 +45,7 @@ app.use(
       password: dbconfig.PASSWORD,
       database: dbconfig.DATABASE,
     }),
+    cookie: { secure: IS_PRODUCTION },
     secret: appconfig.security.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
