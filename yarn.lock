@@ -788,6 +788,7 @@ __metadata:
     express-mysql-session: "npm:^3.0.3"
     express-session: "npm:1.17.1"
     globals: "npm:^16.0.0"
+    http-graceful-shutdown: "npm:3.1.2"
     knex: "npm:^3.1.0"
     log4js: "npm:6.3.0"
     moment: "npm:2.29.1"
@@ -1012,6 +1013,15 @@ __metadata:
     statuses: "npm:>= 1.5.0 < 2"
     toidentifier: "npm:1.0.0"
   checksum: 10c0/5c3443c340d35b2f18ce908266c4ae93305b7d900bef765ac8dc56fa90125b9fe18a1ed9ebf6af23dc3ba7763731921a2682bf968e199eccf383eb8f508be6c2
+  languageName: node
+  linkType: hard
+
+"http-graceful-shutdown@npm:3.1.2":
+  version: 3.1.2
+  resolution: "http-graceful-shutdown@npm:3.1.2"
+  dependencies:
+    debug: "npm:^4.3.1"
+  checksum: 10c0/ee9026794c7d7413f02eb8f6b05acd72d6c8e78ecb3d52237f6f849bc257d17b2ea30c196c774f4eecdba1d62fd087d97acc8f124cbbbb837bd4dc47d3d12a0a
   languageName: node
   linkType: hard
 
